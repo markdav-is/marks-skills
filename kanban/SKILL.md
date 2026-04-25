@@ -1,3 +1,17 @@
+---
+name: kanban
+description: |
+  File-system Kanban board for AI agents. Manages tasks as .md files in a directory
+  structure with backlog/, todo/, doing/, and done/ columns. Supports three execution
+  methods: kanban CLI (cross-platform C# .NET global tool), bash script (Linux/macOS),
+  or direct file operations (agent fallback, no install required). Use any time you
+  need to create, move, or track work items — or when the user asks to manage tasks
+  on a Kanban board.
+author: markdav-is
+version: 1.0.0
+date: 2025-07-10
+---
+
 # KanBanLess Skill
 
 Manage a Kanban board entirely in the file system.
