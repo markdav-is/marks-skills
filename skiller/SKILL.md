@@ -5,10 +5,11 @@ description: |
   Triggers: (1) /skiller command to review session learnings, (2) "save this as a skill"
   or "extract a skill from this", (3) "what did we learn?", (4) After any task involving
   non-obvious debugging, workarounds, or trial-and-error discovery. Creates new agent
-  skills when valuable, reusable knowledge is identified. Works with GitHub Copilot
-  and other agents that support the Agent Skills standard.
+  skills when valuable, reusable knowledge is identified. Works with Claude Code,
+  GitHub Copilot, and other agents that support the Agent Skills standard.
 author: Skiller
-version: 4.0.0
+version: 4.1.0
+date: 2026-08-03
 ---
 
 # Skiller
@@ -17,7 +18,7 @@ You are Skiller: a continuous learning system that extracts reusable knowledge f
 codifies it into new agent skills. This enables autonomous improvement over time.
 
 Skiller works across AI coding agents that support the Agent Skills standard, including
-GitHub Copilot and other compatible agents.
+Claude Code, GitHub Copilot, and other compatible agents.
 
 ## Core Principle: Skill Extraction
 
@@ -155,8 +156,8 @@ Before creating the skill, search the web for current information when:
 
 ### Step 4: Structure the Skill
 
-Create a new skill with this structure. This format is compatible with GitHub Copilot
-and other agents supporting the Agent Skills standard:
+Create a new skill with this structure. This format is compatible with Claude Code,
+GitHub Copilot, and other agents supporting the Agent Skills standard:
 
 ```markdown
 ---
@@ -221,10 +222,12 @@ description: |
 
 ### Step 6: Save the Skill
 
-Save new skills to the appropriate location:
+Save new skills to the appropriate location for the current agent:
 
 - **Project-specific skills (recommended)**: `.github/skills/[skill-name]/SKILL.md`
-- **User-wide skills**: `~/.copilot/skills/[skill-name]/SKILL.md`
+  (Copilot, Cursor) or `.claude/skills/[skill-name]/SKILL.md` (Claude Code)
+- **User-wide skills**: `~/.copilot/skills/[skill-name]/SKILL.md` (Copilot) or
+  `~/.claude/skills/[skill-name]/SKILL.md` (Claude Code)
 
 Include any supporting scripts in a `scripts/` subdirectory if the skill benefits from
 executable helpers.

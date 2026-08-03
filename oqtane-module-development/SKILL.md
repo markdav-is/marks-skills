@@ -9,8 +9,8 @@ description: |
   Use this any time you create, edit, or review any Oqtane module component,
   service, controller, or repository in the PWApps workspace.
 author: Skiller
-version: 1.1.0
-date: 2025-07-14
+version: 1.1.1
+date: 2026-08-03
 ---
 
 # Oqtane Module Development
@@ -33,7 +33,7 @@ client/server split that maps to the Oqtane hosting model:
 
 A shallow clone of the Oqtane framework lives at `.oqtane-ref/` in the
 repository root. It is git-ignored and never committed. **All API contracts,
-method signatures, and base class members must be read from this reference —
+method signatures, and base class members must be read from this reference â€”
 never assumed.**
 
 **One-time setup:**
@@ -62,13 +62,15 @@ git -C .oqtane-ref pull
 
 Before writing any Oqtane-specific code:
 
-1. Use `get_file` to read the relevant reference file and confirm actual
+1. Read the relevant reference file with your agent's file-reading tool
+   (`Read` in Claude Code, `get_file` in Copilot) and confirm actual
    method signatures, constructor parameters, and return types.
-2. Use `file_search` scoped to `.oqtane-ref` when the exact file path is
-   unknown (search by class or interface name).
+2. Search scoped to `.oqtane-ref` when the exact file path is unknown
+   (search by class or interface name) using your agent's file/code search
+   tools (`Glob`/`Grep` in Claude Code, `file_search` in Copilot).
 3. Look at a real existing controller or repository in the reference as a
    structural model before writing a new one.
-4. Never infer API shape from memory — the reference is authoritative.
+4. Never infer API shape from memory â€” the reference is authoritative.
 
 ---
 
@@ -97,7 +99,7 @@ Server/Repository/
 
 ## Client Components
 
-- Inherit from `ModuleBase` — read `.oqtane-ref\Oqtane.Client\Modules\ModuleBase.cs`
+- Inherit from `ModuleBase` â€” read `.oqtane-ref\Oqtane.Client\Modules\ModuleBase.cs`
   for all available properties, fields, and methods before using them.
 - Use the built-in `logger` field and `AddModuleMessage` / `ClearModuleMessage`
   methods from `ModuleBase` for logging and user feedback.
@@ -111,7 +113,7 @@ Server/Repository/
 
 - Create one service class per module when client logic exceeds simple inline
   `@code`. Place it in the module's `Services/` folder.
-- Inherit from `ServiceBase` — read `.oqtane-ref\Oqtane.Client\Services\ServiceBase.cs`
+- Inherit from `ServiceBase` â€” read `.oqtane-ref\Oqtane.Client\Services\ServiceBase.cs`
   for `CreateApiUrl`, HTTP helper methods, and constructor signature before use.
 
 ---
@@ -129,7 +131,7 @@ Server/Repository/
 
 - One interface + one implementation per module.
 - Register both in the module's server-side DI startup file.
-- Data access uses raw SQL or Dapper only — no EF migrations, no navigation
+- Data access uses raw SQL or Dapper only â€” no EF migrations, no navigation
   properties, no EF relationships.
 - Table definitions go in the SQL projects under `dbo/tables/`.
 - Read existing repositories in `.oqtane-ref\Oqtane.Server\Repository\` as
@@ -162,9 +164,9 @@ Apply this skill whenever:
 ## PWApps Constraints
 
 - No EF migrations or navigation properties.
-- No Radzen controls unless explicitly requested — default to Bootstrap and
+- No Radzen controls unless explicitly requested â€” default to Bootstrap and
   Oqtane/Blazor built-ins.
-- No Localizer — use plain text strings directly.
+- No Localizer â€” use plain text strings directly.
 - Settings go in `Settings.razor`; Oqtane loads it automatically from the
   module admin panel.
 

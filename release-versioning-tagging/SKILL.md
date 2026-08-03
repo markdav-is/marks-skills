@@ -3,10 +3,11 @@ name: release-versioning-tagging
 description: |
   How to bump the version of an Oqtane module in this repo and create the corresponding
   ADO git tag. Use whenever a module is ready for deployment: after UAT issues are confirmed
-  done, before creating the deployment PR or pushing a release tag.
+  done, before creating the deployment PR or pushing a release tag. Works with any coding
+  agent (Claude Code, GitHub Copilot) that has the ADO MCP server and a terminal.
 author: Skiller
-version: 1.0.0
-date: 2026-03-02
+version: 1.1.0
+date: 2026-08-03
 ---
 
 # Oqtane Module Versioning and Tagging
@@ -65,7 +66,7 @@ Use semantic versioning:
 - **Minor** (`x.1.0`) — new features, backward-compatible
 - **Major** (`1.0.0`) — breaking changes or major rewrites
 
-### 3. Copilot: create the release branch via ADO MCP
+### 3. Create the release branch via ADO MCP
 
 Use `ado_repo_create_branch` targeting the `PWApps` repository, sourced from `main`:
 
@@ -75,7 +76,7 @@ sourceBranchName: main
 repositoryId:     91193c5e-68e0-4006-a2d6-ffbeb276b015
 ```
 
-### 4. Copilot: update `ModuleInfo.cs`
+### 4. Update `ModuleInfo.cs`
 
 Bump `Version` and **append** the new version to `ReleaseVersions` (Oqtane uses this
 list to run incremental DB migrations in order — never remove old entries):
@@ -85,7 +86,7 @@ Version = "1.0.1",
 ReleaseVersions = "1.0.0,1.0.1",
 ```
 
-### 5. Copilot: commit, push, tag via git CLI in terminal
+### 5. Commit, push, tag via git CLI in terminal
 
 ADO MCP has no commit or tag tools — use the terminal for these steps.
 Run each command separately (no multi-line):
@@ -100,7 +101,7 @@ git tag {module}/v{version}
 git push origin {module}/v{version}
 ```
 
-### 6. Copilot: create the PR and set auto-complete via ADO MCP
+### 6. Create the PR and set auto-complete via ADO MCP
 
 Use `ado_repo_create_pull_request`, then immediately call `ado_repo_update_pull_request` to set auto-complete:
 
@@ -123,7 +124,7 @@ Use `ado_repo_create_pull_request`, then immediately call `ado_repo_update_pull_
 - `ModuleInfo.cs` has both `Version` and `ReleaseVersions` updated
 - `ReleaseVersions` contains every prior version — do not remove old entries
 - Branch created on origin via ADO MCP before file changes are committed
-- Commit, push, and tag all done via git CLI terminal (Copilot-run)
+- Commit, push, and tag all done via git CLI terminal (agent-run)
 - PR created via ADO MCP — no user steps needed
 
 ## Example
@@ -144,7 +145,7 @@ User: roll the version of the surveyor module so I can do a deployment and a tag
 - `ReleaseVersions` drives Oqtane's migration runner — **order matters**, always append.
 - The tag module name is always **lowercase** regardless of how the module class or folder is cased.
 - ADO MCP handles branch creation and PR. Git CLI (terminal) handles commit, push, and tag.
-- No user steps required — Copilot owns the entire workflow.
+- No user steps required — the agent owns the entire workflow.
 
 ## References
 
