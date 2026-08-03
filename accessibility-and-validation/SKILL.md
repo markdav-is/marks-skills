@@ -10,8 +10,8 @@ description: |
   pairing. Use this any time you write, review, or audit any Blazor page or form
   that inherits ModuleBase — including index pages, edit forms, and new-record forms.
 author: Skiller
-version: 1.1.0
-date: 2025-07-10
+version: 1.1.1
+date: 2026-08-03
 ---
 
 # Blazor Accessibility & Form Validation Pattern
@@ -299,7 +299,8 @@ Pattern is in production use in:
 - `Client/Modules/Surveyor/SurveyIndex.razor` — filter label/id, icon-only buttons, actions th
 - `Client/Modules/Surveyor/SurveyRecordIndex.razor` — icon-only buttons, actions th
 
-Build passes with `run_build` after all changes.
+Build the solution after all changes and confirm it passes (use your agent's
+build tool or `dotnet build` in the terminal).
 
 ## Notes
 
